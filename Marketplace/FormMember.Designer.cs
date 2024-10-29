@@ -195,6 +195,7 @@
             buttonSearch.TabIndex = 21;
             buttonSearch.Text = "Sök";
             buttonSearch.UseVisualStyleBackColor = true;
+            buttonSearch.Click += buttonSearch_Click;
             // 
             // buttonLogOut
             // 

@@ -20,9 +20,30 @@ namespace Marketplace
         {
             activeMember = member;
             InitializeComponent();
+            LoadCategories();
+            LoadSortingOptions();
         }
 
         List<Advertisement> searchResultList = new();
+
+        private void LoadCategories()
+        {
+            var categories = CategoryRepository.GetList();
+
+            comboBoxSearchCategory.DataSource = categories;
+            comboBoxSearchCategory.DisplayMember = "CategoryName";
+            comboBoxSearchCategory.ValueMember = "CategoryID";
+
+            comboBoxAdvertisementCategory.DataSource = categories;
+            comboBoxAdvertisementCategory.DisplayMember = "CategoryName";
+            comboBoxAdvertisementCategory.ValueMember = "CategoryID";
+        }
+        private void LoadSortingOptions()
+        {
+            comboBoxSortSearchResults.DataSource = new BindingSource(SorterHelper.SortingOptions, null);
+            comboBoxSortSearchResults.DisplayMember = "Key";
+            comboBoxSortSearchResults.ValueMember = "Value";
+        }
 
         private void buttonLoadUserAdvertisements_Click(object sender, EventArgs e)
         {
@@ -50,13 +71,25 @@ namespace Marketplace
         }
 
         private void buttonClearFields_Click(object sender, EventArgs e)
-        { 
+        {
             listBoxSearchResult.DataSource = new List<Advertisement>();
             textBoxTitle.Text = string.Empty;
             textBoxPrice.Text = string.Empty;
             richTextBoxDescription.Text = string.Empty;
             textBoxSearchField.Text = string.Empty;
             LoadCategories();
+        }
+
+        private void buttonSearch_Click(object sender, EventArgs e)
+        {
+            int searchCategory = comboBoxSearchCategory.SelectedIndex;
+            string searchTextParameter = textBoxSearchField.Text.Trim();
+
+            searchResultList = AdvertisementRepository.SearchAdvertisement(searchCategory, searchTextParameter);
+
+            listBoxSearchResult.DataSource = searchResultList;
+            listBoxSearchResult.DisplayMember = "Title";
+            listBoxSearchResult.ValueMember = "AdvertisementID";
         }
     }
 }
