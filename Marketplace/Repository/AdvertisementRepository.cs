@@ -21,7 +21,7 @@ namespace Marketplace.Repository
             parameters.Add(new SqlParameter("@description", advertisement.Description));
             parameters.Add(new SqlParameter("@username", advertisement.Username));
             parameters.Add(new SqlParameter("@price", advertisement.Price));
-            parameters.Add(new SqlParameter("@categoryID", advertisement.Category));
+            parameters.Add(new SqlParameter("@categoryID", advertisement.CategoryID));
 
             DbContext.ExecuteNonQuery(sqlQuery, parameters);
         }
@@ -36,24 +36,24 @@ namespace Marketplace.Repository
 
             foreach (DataRow row in data.Rows)
             {
-                advertisements.Add(new Advertisement((int)row.ItemArray[0], row.ItemArray[1].ToString(), row.ItemArray[2].ToString(), row.ItemArray[3].ToString(), (int)row.ItemArray[4], row.ItemArray[5].ToString()));
+                advertisements.Add(new Advertisement((int)row.ItemArray[0], row.ItemArray[1].ToString(), row.ItemArray[2].ToString(), row.ItemArray[3].ToString(), (int)row.ItemArray[4], (int)row.ItemArray[5]));
             }
 
             return advertisements;
         }
 
-        public List<Advertisement> GetAdvertisement(string searchCategory, string searchTitle)
+        public List<Advertisement> GetAdvertisement(int searchCategory, string searchTitle)
         {
             List<Advertisement> searchResult = new();
 
             string searchParameterAsLower = "%" + searchTitle.ToLower() + "%";
-            string searchParameterCategory = searchCategory;
+            int? searchParameterCategory = searchCategory;
 
             List<SqlParameter> parameters = new();
 
             string sqlQuery = string.Empty;
 
-            if (string.IsNullOrEmpty(searchCategory))
+            if (searchParameterCategory is null)
             {
                 sqlQuery = "SELECT * FROM Advertisement WHERE LOWER(Title) LIKE @searchParameterAsLower";
 
@@ -77,7 +77,7 @@ namespace Marketplace.Repository
 
             foreach (DataRow row in data.Rows)
             {
-                searchResult.Add(new Advertisement((int)row.ItemArray[0], row.ItemArray[1].ToString(), row.ItemArray[2].ToString(), row.ItemArray[3].ToString(), (int)row.ItemArray[4], row.ItemArray[5].ToString()));
+                searchResult.Add(new Advertisement((int)row.ItemArray[0], row.ItemArray[1].ToString(), row.ItemArray[2].ToString(), row.ItemArray[3].ToString(), (int)row.ItemArray[4], (int)row.ItemArray[5]));
             }
 
             return searchResult;

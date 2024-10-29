@@ -13,27 +13,27 @@ namespace Marketplace.Entities
         public string Description { get; private set; }
         public int Price { get; private set; }
         public string Username { get; private set; }
-        public string Category { get; private set; }
+        public int CategoryID { get; private set; }
 
         //Constructor to create new advertisement
-        public Advertisement(string title, string description, string username, int price, string category)
+        public Advertisement(string title, string description, string username, int price, int category)
         {
             Title = title;
             Description = description;
             Username = username;
             Price = price;
-            Category = category;
+            CategoryID = category;
         }
 
         //Constructor for mapping from DB
-        public Advertisement(int advertisementID, string title, string description, string username, int price, string category)
+        public Advertisement(int advertisementID, string title, string description, string username, int price, int category)
         {
             AdvertisementID = advertisementID;
             Title = title;
             Description = description;
             Username = username;
             Price = price;
-            Category = category;
+            CategoryID = category;
         }
     }
 }
