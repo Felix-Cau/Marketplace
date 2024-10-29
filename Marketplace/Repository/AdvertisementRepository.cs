@@ -58,7 +58,8 @@ namespace Marketplace.Repository
 
             foreach (DataRow row in data.Rows)
             {
-                advertisements.Add(new Advertisement((int)row.ItemArray[0], row.ItemArray[1].ToString(), row.ItemArray[2].ToString(), row.ItemArray[3].ToString(), (int)row.ItemArray[4], (int)row.ItemArray[5]));
+                advertisements.Add(new Advertisement((int)row.ItemArray[0], row.ItemArray[1].ToString(), row.ItemArray[2].ToString(), row.ItemArray[3].ToString(), 
+                                                     (int)row.ItemArray[4], (int)row.ItemArray[5]));
             }
 
             return advertisements;
@@ -100,7 +101,8 @@ namespace Marketplace.Repository
 
             foreach (DataRow row in data.Rows)
             {
-                searchResult.Add(new Advertisement((int)row.ItemArray[0], row.ItemArray[1].ToString(), row.ItemArray[2].ToString(), row.ItemArray[3].ToString(), (int)row.ItemArray[4], (int)row.ItemArray[5]));
+                searchResult.Add(new Advertisement((int)row.ItemArray[0], row.ItemArray[1].ToString(), row.ItemArray[2].ToString(), row.ItemArray[3].ToString(), 
+                                                   (int)row.ItemArray[4], (int)row.ItemArray[5]));
             }
 
             return searchResult;

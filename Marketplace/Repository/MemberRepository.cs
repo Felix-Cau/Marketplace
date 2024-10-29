@@ -39,7 +39,8 @@ namespace Marketplace.Repository
 
             foreach (DataRow row in data.Rows)
             {
-                members.Add(new Member(row.ItemArray[0].ToString(), row.ItemArray[1].ToString(), row.ItemArray[2].ToString(), row.ItemArray[3].ToString(), row.ItemArray[4].ToString(), (int)row.ItemArray[5], row.ItemArray[6].ToString(), row.ItemArray[7].ToString(), row.ItemArray[8].ToString()));
+                members.Add(new Member(row.ItemArray[0].ToString(), row.ItemArray[1].ToString(), row.ItemArray[2].ToString(), row.ItemArray[3].ToString(), 
+                                       row.ItemArray[4].ToString(), (int)row.ItemArray[5], row.ItemArray[6].ToString(), row.ItemArray[7].ToString(), row.ItemArray[8].ToString()));
             }
 
             return members;
@@ -64,7 +65,8 @@ namespace Marketplace.Repository
 
             foreach (DataRow row in data.Rows)
             {
-                members.Add(new Member(row.ItemArray[0].ToString(), row.ItemArray[1].ToString(), row.ItemArray[2].ToString(), row.ItemArray[3].ToString(), row.ItemArray[4].ToString(), (int)row.ItemArray[5], row.ItemArray[6].ToString(), row.ItemArray[7].ToString(), row.ItemArray[8].ToString()));
+                members.Add(new Member(row.ItemArray[0].ToString(), row.ItemArray[1].ToString(), row.ItemArray[2].ToString(), row.ItemArray[3].ToString(), 
+                                       row.ItemArray[4].ToString(), (int)row.ItemArray[5], row.ItemArray[6].ToString(), row.ItemArray[7].ToString(), row.ItemArray[8].ToString()));
             }
 
             if (members.Count > 0)
