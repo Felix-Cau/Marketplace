@@ -14,12 +14,13 @@ namespace Marketplace.Repository
     {
         public static void Save(Advertisement advertisement)
         {
-            string sqlQuery = "INSERT INTO Advertisement(Title, Description, Username, Price, CategoryID) VALUES (@title, @description, @username, @price, @categoryID)";
+            string sqlQuery = "INSERT INTO Advertisement(Title, Description, Date, Username, Price, CategoryID) VALUES (@title, @description, @date, @username, @price, @categoryID)";
 
             List<SqlParameter> parameters = new();
             parameters.Add(new SqlParameter("@title", advertisement.Title));
             parameters.Add(new SqlParameter("@description", advertisement.Description));
             parameters.Add(new SqlParameter("@username", advertisement.Username));
+            parameters.Add(new SqlParameter("@date", advertisement.Date));
             parameters.Add(new SqlParameter("@price", advertisement.Price));
             parameters.Add(new SqlParameter("@categoryID", advertisement.CategoryID));
 
@@ -59,7 +60,27 @@ namespace Marketplace.Repository
             foreach (DataRow row in data.Rows)
             {
                 advertisements.Add(new Advertisement((int)row.ItemArray[0], row.ItemArray[1].ToString(), row.ItemArray[2].ToString(), row.ItemArray[3].ToString(), 
-                                                     (int)row.ItemArray[4], (int)row.ItemArray[5]));
+                                                     (int)row.ItemArray[4], (int)row.ItemArray[5], (DateTime)row.ItemArray[6]));
+            }
+
+            return advertisements;
+        }
+
+        public static List<Advertisement> GetListBasedOnUser(Member member)
+        {
+            string sqlQuery = "SELECT * FROM Advertisement WHERE Username = @username";
+
+            List<SqlParameter> parameters = new();
+            parameters.Add(new SqlParameter("@username", member.Username));
+
+            DataTable data = DbContext.ExecuteQueryReturnTable(sqlQuery, parameters);
+
+            List<Advertisement> advertisements = new();
+
+            foreach (DataRow row in data.Rows)
+            {
+                advertisements.Add(new Advertisement((int)row.ItemArray[0], row.ItemArray[1].ToString(), row.ItemArray[2].ToString(), row.ItemArray[3].ToString(),
+                                                     (int)row.ItemArray[4], (int)row.ItemArray[5], (DateTime)row.ItemArray[6]));
             }
 
             return advertisements;
@@ -102,7 +123,7 @@ namespace Marketplace.Repository
             foreach (DataRow row in data.Rows)
             {
                 searchResult.Add(new Advertisement((int)row.ItemArray[0], row.ItemArray[1].ToString(), row.ItemArray[2].ToString(), row.ItemArray[3].ToString(), 
-                                                   (int)row.ItemArray[4], (int)row.ItemArray[5]));
+                                                   (int)row.ItemArray[4], (int)row.ItemArray[5], (DateTime)row.ItemArray[6]));
             }
 
             return searchResult;

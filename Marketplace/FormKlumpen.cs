@@ -1,4 +1,5 @@
 using Marketplace.Entities;
+using Marketplace.Helper_classes;
 using Marketplace.Repository;
 
 namespace Marketplace
@@ -9,9 +10,10 @@ namespace Marketplace
         {
             InitializeComponent();
             LoadCategories();
+            LoadSortingOptions();
         }
 
-        List<Advertisement> searchResultAdvertisement = new();
+        List<Advertisement> searchResultList = new();
         Advertisement displayAdvertisement = null;
 
         private void LoadCategories()
@@ -27,14 +29,21 @@ namespace Marketplace
             comboBoxAdvertisementCategory.ValueMember = "CategoryID";
         }
 
+        private void LoadSortingOptions()
+        {
+            comboBoxSortSearchResults.DataSource = new BindingSource(SorterHelper.SortingOptions, null);
+            comboBoxSortSearchResults.DisplayMember = "Key";
+            comboBoxSortSearchResults.ValueMember = "Value";
+        }
+
         private void buttonSearch_Click(object sender, EventArgs e)
         {
             int searchCategory = comboBoxSearchCategory.SelectedIndex;
             string searchTextParameter = textBoxSearchField.Text.Trim();
 
-            searchResultAdvertisement = AdvertisementRepository.SearchAdvertisement(searchCategory, searchTextParameter);
+            searchResultList = AdvertisementRepository.SearchAdvertisement(searchCategory, searchTextParameter);
 
-            listBoxSearchResult.DataSource = searchResultAdvertisement;
+            listBoxSearchResult.DataSource = searchResultList;
             listBoxSearchResult.DisplayMember = "Title";
             listBoxSearchResult.ValueMember = "AdvertisementID";
         }
@@ -48,14 +57,14 @@ namespace Marketplace
             textBoxSearchField.Text = string.Empty;
             LoadCategories();
         }
-        
+
         private void listBoxSearchResult_Click(object sender, EventArgs e)
         {
             int advertisementID = listBoxSearchResult.SelectedIndex;
 
-            displayAdvertisement = searchResultAdvertisement.SingleOrDefault(x => x.AdvertisementID == advertisementID);
+            displayAdvertisement = searchResultList.SingleOrDefault(x => x.AdvertisementID == advertisementID);
 
-            if(displayAdvertisement is not null)
+            if (displayAdvertisement is not null)
             {
                 textBoxTitle.Text = displayAdvertisement.Title;
                 textBoxPrice.Text = displayAdvertisement.Price.ToString();
@@ -64,8 +73,17 @@ namespace Marketplace
             }
             else
             {
-                MessageBox.Show("Something went wrong. Try again.");
+                MessageBox.Show("Något gick fel. Försök igen.");
             }
+        }
+
+        private void comboBoxSortSearchResults_Click(object sender, EventArgs e)
+        {
+            string sortOption = comboBoxSortSearchResults.SelectedValue.ToString();
+
+            var searchResultListSorted = SorterHelper.SortAdvertisementList(sortOption, searchResultList);
+
+            searchResultList = searchResultListSorted;
         }
     }
 }

@@ -45,6 +45,8 @@
             comboBoxAdvertisementCategory = new ComboBox();
             label6 = new Label();
             buttonClearFields = new Button();
+            comboBoxSortSearchResults = new ComboBox();
+            label7 = new Label();
             SuspendLayout();
             // 
             // buttonLogin
@@ -194,11 +196,31 @@
             buttonClearFields.UseVisualStyleBackColor = true;
             buttonClearFields.Click += buttonClearFields_Click;
             // 
+            // comboBoxSortSearchResults
+            // 
+            comboBoxSortSearchResults.FormattingEnabled = true;
+            comboBoxSortSearchResults.Location = new Point(12, 86);
+            comboBoxSortSearchResults.Name = "comboBoxSortSearchResults";
+            comboBoxSortSearchResults.Size = new Size(157, 23);
+            comboBoxSortSearchResults.TabIndex = 17;
+            comboBoxSortSearchResults.Click += comboBoxSortSearchResults_Click;
+            // 
+            // label7
+            // 
+            label7.AutoSize = true;
+            label7.Location = new Point(12, 68);
+            label7.Name = "label7";
+            label7.Size = new Size(86, 15);
+            label7.TabIndex = 18;
+            label7.Text = "Sortera resultat";
+            // 
             // FormKlumpen
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(684, 661);
+            Controls.Add(label7);
+            Controls.Add(comboBoxSortSearchResults);
             Controls.Add(buttonClearFields);
             Controls.Add(label6);
             Controls.Add(comboBoxAdvertisementCategory);
@@ -241,5 +263,7 @@
         private ComboBox comboBoxAdvertisementCategory;
         private Label label6;
         private Button buttonClearFields;
+        private ComboBox comboBoxSortSearchResults;
+        private Label label7;
     }
 }
