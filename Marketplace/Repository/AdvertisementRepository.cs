@@ -16,7 +16,7 @@ namespace Marketplace.Repository
         {
             string sqlQuery = "INSERT INTO Advertisement(Title, Description, Username, Price, CategoryID) VALUES (@title, @description, @username, @price, @categoryID)";
 
-            List<SqlParameter> parameters = new List<SqlParameter>();
+            List<SqlParameter> parameters = new();
             parameters.Add(new SqlParameter("@title", advertisement.Title));
             parameters.Add(new SqlParameter("@description", advertisement.Description));
             parameters.Add(new SqlParameter("@username", advertisement.Username));
@@ -26,13 +26,35 @@ namespace Marketplace.Repository
             DbContext.ExecuteNonQuery(sqlQuery, parameters);
         }
 
+        public void Update(Advertisement advertisement)
+        {
+            string sqlQuery = "UPDATE Advertisement SET Title = @title, Description = @description, Price = @price, CategoryID = @categoryID WHERE AdvertisementID = @advertisementID";
+
+            List<SqlParameter> parameters = new();
+            parameters.Add(new SqlParameter("@title", advertisement.Title));
+            parameters.Add(new SqlParameter("@description", advertisement.Description));
+            parameters.Add(new SqlParameter("@price", advertisement.Price));
+            parameters.Add(new SqlParameter("@categoryID", advertisement.CategoryID));
+            parameters.Add(new SqlParameter("@advertisementID", advertisement.AdvertisementID));
+
+            DbContext.ExecuteNonQuery(sqlQuery, parameters);
+        }
+
+        public void Delete(Advertisement advertisement)
+        {
+            string sqlQuery = "DELETE FROM Advertisement WHERE AdvertisementID = @advertisementID";
+
+            List<SqlParameter> parameters = new();
+            parameters.Add(new SqlParameter("@advertisementID", advertisement.AdvertisementID));
+        }
+
         public List<Advertisement> GetList()
         {
             string sqlQuery = "SELECT * FROM Advertisement";
 
             DataTable data = DbContext.ExecuteQueryReturnTable(sqlQuery, new List<SqlParameter>());
 
-            List<Advertisement> advertisements = new List<Advertisement>();
+            List<Advertisement> advertisements = new();
 
             foreach (DataRow row in data.Rows)
             {
@@ -42,7 +64,7 @@ namespace Marketplace.Repository
             return advertisements;
         }
 
-        public List<Advertisement> GetAdvertisement(int searchCategory, string searchTitle)
+        public List<Advertisement> SearchAdvertisement(int searchCategory, string searchTitle)
         {
             List<Advertisement> searchResult = new();
 

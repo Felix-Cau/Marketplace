@@ -9,7 +9,7 @@ namespace Marketplace.Entities
     public class Member
     {
         public string Username { get; private set; }
-        private string Password { get; set; }
+        public string Password { get; private set; }
         public string FirstName { get; private set; }
         public string LastName { get; private set; }
         public string Address { get; private set; }
