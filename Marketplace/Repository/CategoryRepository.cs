@@ -9,9 +9,9 @@ using System.Threading.Tasks;
 
 namespace Marketplace.Repository
 {
-    public class CategoryRepository
+    public static class CategoryRepository
     {
-        public List<Category> GetList()
+        public static List<Category> GetList()
         {
             string sqlQuery = "SELECT * FROM Category";
 

@@ -10,9 +10,9 @@ using System.Threading.Tasks;
 
 namespace Marketplace.Repository
 {
-    public class AdvertisementRepository
+    public static class AdvertisementRepository
     {
-        public void Save(Advertisement advertisement)
+        public static void Save(Advertisement advertisement)
         {
             string sqlQuery = "INSERT INTO Advertisement(Title, Description, Username, Price, CategoryID) VALUES (@title, @description, @username, @price, @categoryID)";
 
@@ -26,7 +26,7 @@ namespace Marketplace.Repository
             DbContext.ExecuteNonQuery(sqlQuery, parameters);
         }
 
-        public void Update(Advertisement advertisement)
+        public static void Update(Advertisement advertisement)
         {
             string sqlQuery = "UPDATE Advertisement SET Title = @title, Description = @description, Price = @price, CategoryID = @categoryID WHERE AdvertisementID = @advertisementID";
 
@@ -40,7 +40,7 @@ namespace Marketplace.Repository
             DbContext.ExecuteNonQuery(sqlQuery, parameters);
         }
 
-        public void Delete(Advertisement advertisement)
+        public static void Delete(Advertisement advertisement)
         {
             string sqlQuery = "DELETE FROM Advertisement WHERE AdvertisementID = @advertisementID";
 
@@ -48,7 +48,7 @@ namespace Marketplace.Repository
             parameters.Add(new SqlParameter("@advertisementID", advertisement.AdvertisementID));
         }
 
-        public List<Advertisement> GetList()
+        public static List<Advertisement> GetList()
         {
             string sqlQuery = "SELECT * FROM Advertisement";
 
@@ -64,7 +64,7 @@ namespace Marketplace.Repository
             return advertisements;
         }
 
-        public List<Advertisement> SearchAdvertisement(int searchCategory, string searchTitle)
+        public static List<Advertisement> SearchAdvertisement(int searchCategory, string searchTitle)
         {
             List<Advertisement> searchResult = new();
 

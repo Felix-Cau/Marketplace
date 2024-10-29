@@ -198,7 +198,7 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(684, 678);
+            ClientSize = new Size(684, 661);
             Controls.Add(buttonClearFields);
             Controls.Add(label6);
             Controls.Add(comboBoxAdvertisementCategory);

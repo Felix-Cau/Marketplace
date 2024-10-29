@@ -9,9 +9,9 @@ using System.Threading.Tasks;
 
 namespace Marketplace.Repository
 {
-    public class MemberRepository
+    public static class MemberRepository
     {
-        public void Save(Member member)
+        public static void Save(Member member)
         {
             string sqlQuery = "INSERT INTO Member(Username, Password, FirstName, LastName, Address, PostalCode, City, Email, PhoneNumber) VALUES (@username, @password, @firstname, @lastname, @address, @postalcode, @city, @email, @phonenumber)";
 
@@ -29,7 +29,7 @@ namespace Marketplace.Repository
             DbContext.ExecuteNonQuery(sqlQuery, parameters);
         }
 
-        public List<Member> GetList()
+        public static List<Member> GetList()
         {
             string sqlQuery = "SELECT * FROM Member";
 
@@ -45,7 +45,7 @@ namespace Marketplace.Repository
             return members;
         }
 
-        public (bool, Member) CheckCredentialsForLogin(string username, string password)
+        public static (bool, Member) CheckCredentialsForLogin(string username, string password)
         {
             bool correctMemberLogin = false;
 

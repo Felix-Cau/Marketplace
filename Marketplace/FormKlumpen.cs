@@ -12,11 +12,11 @@ namespace Marketplace
         }
 
         List<Advertisement> searchResultAdvertisement = new();
+        Advertisement displayAdvertisement = null;
 
         private void LoadCategories()
         {
-            CategoryRepository categoryRepository = new CategoryRepository();
-            var categories = categoryRepository.GetList();
+            var categories = CategoryRepository.GetList();
 
             comboBoxSearchCategory.DataSource = categories;
             comboBoxSearchCategory.DisplayMember = "CategoryName";
@@ -32,8 +32,7 @@ namespace Marketplace
             int searchCategory = comboBoxSearchCategory.SelectedIndex;
             string searchTextParameter = textBoxSearchField.Text.Trim();
 
-            AdvertisementRepository advertisementRepository = new();
-            searchResultAdvertisement = advertisementRepository.SearchAdvertisement(searchCategory, searchTextParameter);
+            searchResultAdvertisement = AdvertisementRepository.SearchAdvertisement(searchCategory, searchTextParameter);
 
             listBoxSearchResult.DataSource = searchResultAdvertisement;
             listBoxSearchResult.DisplayMember = "Title";
@@ -54,12 +53,19 @@ namespace Marketplace
         {
             int advertisementID = listBoxSearchResult.SelectedIndex;
 
-            Advertisement displayAdvertisement = searchResultAdvertisement.SingleOrDefault(x => x.AdvertisementID == advertisementID);
+            displayAdvertisement = searchResultAdvertisement.SingleOrDefault(x => x.AdvertisementID == advertisementID);
 
-            textBoxTitle.Text = displayAdvertisement.Title;
-            textBoxPrice.Text = displayAdvertisement.Price.ToString();
-            richTextBoxDescription.Text = displayAdvertisement.Description;
-            comboBoxAdvertisementCategory.SelectedValue = displayAdvertisement.CategoryID;
+            if(displayAdvertisement is not null)
+            {
+                textBoxTitle.Text = displayAdvertisement.Title;
+                textBoxPrice.Text = displayAdvertisement.Price.ToString();
+                richTextBoxDescription.Text = displayAdvertisement.Description;
+                comboBoxAdvertisementCategory.SelectedValue = displayAdvertisement.CategoryID;
+            }
+            else
+            {
+                MessageBox.Show("Something went wrong. Try again.");
+            }
         }
     }
 }
