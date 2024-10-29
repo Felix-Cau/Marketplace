@@ -75,7 +75,8 @@ namespace Marketplace.Repository
 
             string sqlQuery = string.Empty;
 
-            if (searchParameterCategory is null)
+            //Denna kondition behöver ses över. Tror att category sätts som -1 om inget väljs.
+            if (searchParameterCategory == -1)
             {
                 sqlQuery = "SELECT * FROM Advertisement WHERE LOWER(Title) LIKE @searchParameterAsLower";
 
