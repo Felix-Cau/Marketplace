@@ -28,8 +28,8 @@ namespace Marketplace
             var emptyCategory = new Category(-1, "");
             searchCategories.Insert(0, emptyCategory);
 
-            ComboBoxHelper.SetComboBoxDataSource(comboBoxSearchCategory, searchCategories);
-            ComboBoxHelper.SetComboBoxDataSource(comboBoxAdvertisementCategory, advertisementCategory);
+            ComboBoxHelper.SetComboBoxDataSourceForCategory(comboBoxSearchCategory, searchCategories);
+            ComboBoxHelper.SetComboBoxDataSourceForCategory(comboBoxAdvertisementCategory, advertisementCategory);
         }
         private void LoadSortingOptions()
         {
@@ -60,7 +60,9 @@ namespace Marketplace
 
             var searchResultListSorted = SorterHelper.SortAdvertisementList(sortOption, searchResultList);
 
-            searchResultList = searchResultListSorted;
+            listBoxSearchResult.DataSource = searchResultListSorted;
+            listBoxSearchResult.DisplayMember = "Title";
+            listBoxSearchResult.ValueMember = "AdvertisementID";
         }
 
         private void buttonClearFields_Click(object sender, EventArgs e)

@@ -21,6 +21,7 @@ namespace Marketplace.Entities
             ReciverID = reciverID;
             Title = title;
             MessageText = messageText;
+            Date = DateTime.Now;
         }
 
         //För DB mapping
@@ -33,7 +34,5 @@ namespace Marketplace.Entities
             MessageText = messageText;
             Date = date;
         }
-
-        public void SetSenderID(string senderID) { SenderID = senderID; };
     }
 }

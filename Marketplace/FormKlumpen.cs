@@ -25,8 +25,8 @@ namespace Marketplace
             var emptyCategory = new Category(-1, "");
             searchCategories.Insert(0, emptyCategory);
 
-            ComboBoxHelper.SetComboBoxDataSource(comboBoxSearchCategory, searchCategories);
-            ComboBoxHelper.SetComboBoxDataSource(comboBoxAdvertisementCategory, searchCategories);
+            ComboBoxHelper.SetComboBoxDataSourceForCategory(comboBoxSearchCategory, searchCategories);
+            ComboBoxHelper.SetComboBoxDataSourceForCategory(comboBoxAdvertisementCategory, searchCategories);
         }
 
         private void LoadSortingOptions()

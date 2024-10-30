@@ -41,22 +41,26 @@
             labelRecievedDate = new Label();
             textBoxRecievedDate = new TextBox();
             buttonClearFields = new Button();
+            labelRecipient = new Label();
+            textBoxRecipient = new TextBox();
+            comboBoxMessageTypes = new ComboBox();
+            label1 = new Label();
             SuspendLayout();
             // 
             // listBoxMessageList
             // 
             listBoxMessageList.FormattingEnabled = true;
             listBoxMessageList.ItemHeight = 15;
-            listBoxMessageList.Location = new Point(12, 27);
+            listBoxMessageList.Location = new Point(12, 90);
             listBoxMessageList.Name = "listBoxMessageList";
-            listBoxMessageList.Size = new Size(176, 544);
+            listBoxMessageList.Size = new Size(176, 454);
             listBoxMessageList.TabIndex = 0;
             listBoxMessageList.Click += listBoxMessageList_Click;
             // 
             // labelMessageList
             // 
             labelMessageList.AutoSize = true;
-            labelMessageList.Location = new Point(12, 9);
+            labelMessageList.Location = new Point(12, 72);
             labelMessageList.Name = "labelMessageList";
             labelMessageList.Size = new Size(94, 15);
             labelMessageList.TabIndex = 1;
@@ -66,7 +70,7 @@
             // 
             textBoxTopic.Location = new Point(194, 90);
             textBoxTopic.Name = "textBoxTopic";
-            textBoxTopic.Size = new Size(149, 23);
+            textBoxTopic.Size = new Size(304, 23);
             textBoxTopic.TabIndex = 2;
             // 
             // textBoxSenderID
@@ -134,7 +138,7 @@
             // labelRecievedDate
             // 
             labelRecievedDate.AutoSize = true;
-            labelRecievedDate.Location = new Point(566, 72);
+            labelRecievedDate.Location = new Point(516, 72);
             labelRecievedDate.Name = "labelRecievedDate";
             labelRecievedDate.Size = new Size(94, 15);
             labelRecievedDate.TabIndex = 10;
@@ -142,9 +146,9 @@
             // 
             // textBoxRecievedDate
             // 
-            textBoxRecievedDate.Location = new Point(566, 90);
+            textBoxRecievedDate.Location = new Point(516, 90);
             textBoxRecievedDate.Name = "textBoxRecievedDate";
-            textBoxRecievedDate.Size = new Size(100, 23);
+            textBoxRecievedDate.Size = new Size(150, 23);
             textBoxRecievedDate.TabIndex = 11;
             // 
             // buttonClearFields
@@ -157,11 +161,49 @@
             buttonClearFields.UseVisualStyleBackColor = true;
             buttonClearFields.Click += buttonClearFields_Click;
             // 
+            // labelRecipient
+            // 
+            labelRecipient.AutoSize = true;
+            labelRecipient.Location = new Point(349, 28);
+            labelRecipient.Name = "labelRecipient";
+            labelRecipient.Size = new Size(62, 15);
+            labelRecipient.TabIndex = 14;
+            labelRecipient.Text = "Mottagare";
+            // 
+            // textBoxRecipient
+            // 
+            textBoxRecipient.Location = new Point(349, 46);
+            textBoxRecipient.Name = "textBoxRecipient";
+            textBoxRecipient.Size = new Size(149, 23);
+            textBoxRecipient.TabIndex = 13;
+            // 
+            // comboBoxMessageTypes
+            // 
+            comboBoxMessageTypes.FormattingEnabled = true;
+            comboBoxMessageTypes.Location = new Point(12, 46);
+            comboBoxMessageTypes.Name = "comboBoxMessageTypes";
+            comboBoxMessageTypes.Size = new Size(176, 23);
+            comboBoxMessageTypes.TabIndex = 15;
+            comboBoxMessageTypes.SelectedIndexChanged += comboBoxMessageTypes_SelectedIndexChanged;
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Location = new Point(12, 28);
+            label1.Name = "label1";
+            label1.Size = new Size(133, 15);
+            label1.TabIndex = 16;
+            label1.Text = "Visa mottagna/skickade";
+            // 
             // FormMessages
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(684, 661);
+            ClientSize = new Size(684, 595);
+            Controls.Add(label1);
+            Controls.Add(comboBoxMessageTypes);
+            Controls.Add(labelRecipient);
+            Controls.Add(textBoxRecipient);
             Controls.Add(buttonClearFields);
             Controls.Add(textBoxRecievedDate);
             Controls.Add(labelRecievedDate);
@@ -196,5 +238,9 @@
         private Label labelRecievedDate;
         private TextBox textBoxRecievedDate;
         private Button buttonClearFields;
+        private Label labelRecipient;
+        private TextBox textBoxRecipient;
+        private ComboBox comboBoxMessageTypes;
+        private Label label1;
     }
 }
