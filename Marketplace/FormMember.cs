@@ -97,6 +97,8 @@ namespace Marketplace
                 textBoxPrice.Text = displayAdvertisement.Price.ToString();
                 richTextBoxDescription.Text = displayAdvertisement.Description;
                 comboBoxAdvertisementCategory.SelectedValue = displayAdvertisement.CategoryID;
+                textBoxDateCreated.Text = displayAdvertisement.Date.ToString();
+                textBoxUsername.Text = displayAdvertisement.Username;
             }
             else
             {

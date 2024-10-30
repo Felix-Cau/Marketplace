@@ -47,6 +47,10 @@
             buttonClearFields = new Button();
             comboBoxSortSearchResults = new ComboBox();
             label7 = new Label();
+            label8 = new Label();
+            label9 = new Label();
+            textBoxUsername = new TextBox();
+            textBoxDateCreated = new TextBox();
             SuspendLayout();
             // 
             // buttonLogin
@@ -216,11 +220,47 @@
             label7.TabIndex = 18;
             label7.Text = "Sortera resultat";
             // 
+            // label8
+            // 
+            label8.AutoSize = true;
+            label8.Location = new Point(175, 68);
+            label8.Name = "label8";
+            label8.Size = new Size(88, 15);
+            label8.TabIndex = 19;
+            label8.Text = "Annons skapad";
+            // 
+            // label9
+            // 
+            label9.AutoSize = true;
+            label9.Location = new Point(357, 68);
+            label9.Name = "label9";
+            label9.Size = new Size(60, 15);
+            label9.TabIndex = 20;
+            label9.Text = "Skapad av";
+            // 
+            // textBoxUsername
+            // 
+            textBoxUsername.Location = new Point(357, 86);
+            textBoxUsername.Name = "textBoxUsername";
+            textBoxUsername.Size = new Size(100, 23);
+            textBoxUsername.TabIndex = 21;
+            // 
+            // textBoxDateCreated
+            // 
+            textBoxDateCreated.Location = new Point(175, 86);
+            textBoxDateCreated.Name = "textBoxDateCreated";
+            textBoxDateCreated.Size = new Size(176, 23);
+            textBoxDateCreated.TabIndex = 22;
+            // 
             // FormKlumpen
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(684, 661);
+            Controls.Add(textBoxDateCreated);
+            Controls.Add(textBoxUsername);
+            Controls.Add(label9);
+            Controls.Add(label8);
             Controls.Add(label7);
             Controls.Add(comboBoxSortSearchResults);
             Controls.Add(buttonClearFields);
@@ -267,5 +307,9 @@
         private Button buttonClearFields;
         private ComboBox comboBoxSortSearchResults;
         private Label label7;
+        private Label label8;
+        private Label label9;
+        private TextBox textBoxUsername;
+        private TextBox textBoxDateCreated;
     }
 }

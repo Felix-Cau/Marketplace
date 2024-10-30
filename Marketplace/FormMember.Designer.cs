@@ -50,6 +50,10 @@
             buttonUpdateAdvertisement = new Button();
             buttonRemoveAdvertisement = new Button();
             buttonSaveNewAdvertisement = new Button();
+            textBoxDateCreated = new TextBox();
+            textBoxUsername = new TextBox();
+            label9 = new Label();
+            label8 = new Label();
             SuspendLayout();
             // 
             // label7
@@ -249,11 +253,47 @@
             buttonSaveNewAdvertisement.UseVisualStyleBackColor = true;
             buttonSaveNewAdvertisement.Click += buttonSaveNewAdvertisement_Click;
             // 
+            // textBoxDateCreated
+            // 
+            textBoxDateCreated.Location = new Point(175, 87);
+            textBoxDateCreated.Name = "textBoxDateCreated";
+            textBoxDateCreated.Size = new Size(176, 23);
+            textBoxDateCreated.TabIndex = 45;
+            // 
+            // textBoxUsername
+            // 
+            textBoxUsername.Location = new Point(357, 87);
+            textBoxUsername.Name = "textBoxUsername";
+            textBoxUsername.Size = new Size(100, 23);
+            textBoxUsername.TabIndex = 44;
+            // 
+            // label9
+            // 
+            label9.AutoSize = true;
+            label9.Location = new Point(357, 69);
+            label9.Name = "label9";
+            label9.Size = new Size(60, 15);
+            label9.TabIndex = 43;
+            label9.Text = "Skapad av";
+            // 
+            // label8
+            // 
+            label8.AutoSize = true;
+            label8.Location = new Point(175, 69);
+            label8.Name = "label8";
+            label8.Size = new Size(88, 15);
+            label8.TabIndex = 42;
+            label8.Text = "Annons skapad";
+            // 
             // FormMember
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(684, 661);
+            Controls.Add(textBoxDateCreated);
+            Controls.Add(textBoxUsername);
+            Controls.Add(label9);
+            Controls.Add(label8);
             Controls.Add(buttonSaveNewAdvertisement);
             Controls.Add(buttonRemoveAdvertisement);
             Controls.Add(buttonUpdateAdvertisement);
@@ -306,5 +346,9 @@
         private Button buttonUpdateAdvertisement;
         private Button buttonRemoveAdvertisement;
         private Button buttonSaveNewAdvertisement;
+        private TextBox textBoxDateCreated;
+        private TextBox textBoxUsername;
+        private Label label9;
+        private Label label8;
     }
 }
