@@ -33,5 +33,7 @@ namespace Marketplace.Entities
             MessageText = messageText;
             Date = date;
         }
+
+        public void SetSenderID(string senderID) { SenderID = senderID; };
     }
 }

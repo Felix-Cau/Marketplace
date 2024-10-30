@@ -23,6 +23,7 @@ namespace Marketplace
             activeMember = member;
             textBoxTopic.Text = $"Angående {advertisement.Title}";
             richTextBoxMessageText.Text = $"Skriv ditt meddalnde ovanför strecket.\n----------------------\nFrån annons:\n{advertisement.Description}";
+            currentMessage.SetSenderID(advertisement.Username);
         }
 
         List<Message> recievedMessages = new();
