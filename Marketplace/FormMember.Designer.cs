@@ -54,6 +54,8 @@
             textBoxUsername = new TextBox();
             label9 = new Label();
             label8 = new Label();
+            buttonMessages = new Button();
+            buttonSendMessageToAdvertisementUser = new Button();
             SuspendLayout();
             // 
             // label7
@@ -215,7 +217,7 @@
             // 
             // buttonLoadUserAdvertisements
             // 
-            buttonLoadUserAdvertisements.Location = new Point(565, 9);
+            buttonLoadUserAdvertisements.Location = new Point(463, 9);
             buttonLoadUserAdvertisements.Name = "buttonLoadUserAdvertisements";
             buttonLoadUserAdvertisements.Size = new Size(96, 23);
             buttonLoadUserAdvertisements.TabIndex = 38;
@@ -257,12 +259,12 @@
             // 
             textBoxDateCreated.Location = new Point(175, 87);
             textBoxDateCreated.Name = "textBoxDateCreated";
-            textBoxDateCreated.Size = new Size(176, 23);
+            textBoxDateCreated.Size = new Size(137, 23);
             textBoxDateCreated.TabIndex = 45;
             // 
             // textBoxUsername
             // 
-            textBoxUsername.Location = new Point(357, 87);
+            textBoxUsername.Location = new Point(318, 87);
             textBoxUsername.Name = "textBoxUsername";
             textBoxUsername.Size = new Size(100, 23);
             textBoxUsername.TabIndex = 44;
@@ -270,7 +272,7 @@
             // label9
             // 
             label9.AutoSize = true;
-            label9.Location = new Point(357, 69);
+            label9.Location = new Point(323, 69);
             label9.Name = "label9";
             label9.Size = new Size(60, 15);
             label9.TabIndex = 43;
@@ -285,11 +287,33 @@
             label8.TabIndex = 42;
             label8.Text = "Annons skapad";
             // 
+            // buttonMessages
+            // 
+            buttonMessages.Location = new Point(565, 9);
+            buttonMessages.Name = "buttonMessages";
+            buttonMessages.Size = new Size(96, 23);
+            buttonMessages.TabIndex = 46;
+            buttonMessages.Text = "Meddelanden";
+            buttonMessages.UseVisualStyleBackColor = true;
+            buttonMessages.Click += buttonMessages_Click;
+            // 
+            // buttonSendMessageToAdvertisementUser
+            // 
+            buttonSendMessageToAdvertisementUser.Location = new Point(424, 87);
+            buttonSendMessageToAdvertisementUser.Name = "buttonSendMessageToAdvertisementUser";
+            buttonSendMessageToAdvertisementUser.Size = new Size(237, 23);
+            buttonSendMessageToAdvertisementUser.TabIndex = 47;
+            buttonSendMessageToAdvertisementUser.Text = "Skicka meddelande till annonsägaren";
+            buttonSendMessageToAdvertisementUser.UseVisualStyleBackColor = true;
+            buttonSendMessageToAdvertisementUser.Click += buttonSendMessageToAdvertisementUser_Click;
+            // 
             // FormMember
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(684, 661);
+            Controls.Add(buttonSendMessageToAdvertisementUser);
+            Controls.Add(buttonMessages);
             Controls.Add(textBoxDateCreated);
             Controls.Add(textBoxUsername);
             Controls.Add(label9);
@@ -350,5 +374,7 @@
         private TextBox textBoxUsername;
         private Label label9;
         private Label label8;
+        private Button buttonMessages;
+        private Button buttonSendMessageToAdvertisementUser;
     }
 }

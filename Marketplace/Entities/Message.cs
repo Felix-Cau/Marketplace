@@ -13,6 +13,7 @@ namespace Marketplace.Entities
         public string ReciverID { get; private set; }
         public string Title { get; private set; }
         public string MessageText {  get; private set; }
+        public DateTime Date { get; private set; }
 
         public Message(string senderID, string reciverID, string title, string messageText)
         {
@@ -23,13 +24,14 @@ namespace Marketplace.Entities
         }
 
         //För DB mapping
-        public Message(int messageID, string senderID, string reciverID, string title, string messageText)
+        public Message(int messageID, string senderID, string reciverID, string title, string messageText, DateTime date)
         {
             MessageID = messageID;
             SenderID = senderID;
             ReciverID = reciverID;
             Title = title;
             MessageText = messageText;
+            Date = date;
         }
     }
 }

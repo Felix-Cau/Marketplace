@@ -7,7 +7,7 @@ namespace Marketplace
     public partial class FormMember : Form
     {
         Member activeMember = null;
-        Advertisement displayAdvertisement = null;
+        Advertisement displayedAdvertisement = null;
 
         public FormMember(Member member)
         {
@@ -89,16 +89,16 @@ namespace Marketplace
         {
             int advertisementID = (int)listBoxSearchResult.SelectedValue;
 
-            displayAdvertisement = searchResultList.SingleOrDefault(x => x.AdvertisementID == advertisementID);
+            displayedAdvertisement = searchResultList.SingleOrDefault(x => x.AdvertisementID == advertisementID);
 
-            if (displayAdvertisement is not null)
+            if (displayedAdvertisement is not null)
             {
-                textBoxTitle.Text = displayAdvertisement.Title;
-                textBoxPrice.Text = displayAdvertisement.Price.ToString();
-                richTextBoxDescription.Text = displayAdvertisement.Description;
-                comboBoxAdvertisementCategory.SelectedValue = displayAdvertisement.CategoryID;
-                textBoxDateCreated.Text = displayAdvertisement.Date.ToString();
-                textBoxUsername.Text = displayAdvertisement.Username;
+                textBoxTitle.Text = displayedAdvertisement.Title;
+                textBoxPrice.Text = displayedAdvertisement.Price.ToString();
+                richTextBoxDescription.Text = displayedAdvertisement.Description;
+                comboBoxAdvertisementCategory.SelectedValue = displayedAdvertisement.CategoryID;
+                textBoxDateCreated.Text = displayedAdvertisement.Date.ToString();
+                textBoxUsername.Text = displayedAdvertisement.Username;
             }
             else
             {
@@ -109,13 +109,13 @@ namespace Marketplace
         private void buttonRemoveAdvertisement_Click(object sender, EventArgs e)
         {
 
-            if (displayAdvertisement.Username != activeMember.Username)
+            if (displayedAdvertisement.Username != activeMember.Username)
             {
                 MessageBox.Show("Du kan bara ta bort annonser du själv har skapat.");
             }
             else
             {
-                AdvertisementRepository.Delete(displayAdvertisement);
+                AdvertisementRepository.Delete(displayedAdvertisement);
 
                 buttonClearFields_Click(sender, e);
             }
@@ -123,7 +123,7 @@ namespace Marketplace
 
         private void buttonUpdateAdvertisement_Click(object sender, EventArgs e)
         {
-            if (displayAdvertisement.Username != activeMember.Username)
+            if (displayedAdvertisement.Username != activeMember.Username)
             {
                 MessageBox.Show("Du kan bara uppdatera annonser du själv har skapat.");
             }
@@ -133,12 +133,12 @@ namespace Marketplace
 
                 if (successfullParse)
                 {
-                    displayAdvertisement.SetAdvertisementTitle(textBoxTitle.Text);
-                    displayAdvertisement.SetAdvertisementDescription(richTextBoxDescription.Text);
-                    displayAdvertisement.SetAdvertisementPrice(price);
-                    displayAdvertisement.SetAdvertisementCategoryID((int)comboBoxAdvertisementCategory.SelectedValue);
+                    displayedAdvertisement.SetAdvertisementTitle(textBoxTitle.Text);
+                    displayedAdvertisement.SetAdvertisementDescription(richTextBoxDescription.Text);
+                    displayedAdvertisement.SetAdvertisementPrice(price);
+                    displayedAdvertisement.SetAdvertisementCategoryID((int)comboBoxAdvertisementCategory.SelectedValue);
 
-                    AdvertisementRepository.Update(displayAdvertisement);
+                    AdvertisementRepository.Update(displayedAdvertisement);
 
                     MessageBox.Show("Annonsen är uppdaterad.");
                     buttonClearFields_Click(sender, e);
@@ -173,6 +173,18 @@ namespace Marketplace
             {
                 MessageBox.Show("Fälten titel, beskrivning, pris och annonskategori måste vara ifyllda.");
             }
+        }
+
+        private void buttonMessages_Click(object sender, EventArgs e)
+        {
+            FormMessages formMessages = new FormMessages(activeMember);
+            formMessages.ShowDialog();
+        }
+
+        private void buttonSendMessageToAdvertisementUser_Click(object sender, EventArgs e)
+        {
+            FormMessages formMessages = new FormMessages(activeMember, displayedAdvertisement);
+            formMessages.ShowDialog();
         }
     }
 }

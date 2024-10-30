@@ -32,7 +32,7 @@ namespace Marketplace.Repository
 
         public static List<Message> GetMessages(Member member)
         {
-            string sqlQuery = "SELECT * FROM Message WHERE ReciverID = @reciverID";
+            string sqlQuery = "SELECT * FROM Message WHERE ReciverID = @reciverID ORDER BY Date DESC";
 
             List<SqlParameter> parameters = new();
             parameters.Add(new SqlParameter("@reciverID", member.Username));
@@ -43,7 +43,7 @@ namespace Marketplace.Repository
 
             foreach (DataRow row in data.Rows)
             {
-                loadedMessages.Add(new Message((int)row.ItemArray[0], row.ItemArray[1].ToString(), row.ItemArray[2].ToString(), row.ItemArray[3].ToString(), row.ItemArray[4].ToString()));
+                loadedMessages.Add(new Message((int)row.ItemArray[0], row.ItemArray[1].ToString(), row.ItemArray[2].ToString(), row.ItemArray[3].ToString(), row.ItemArray[4].ToString(), (DateTime)row.ItemArray[5]));
             }
 
             return loadedMessages;
