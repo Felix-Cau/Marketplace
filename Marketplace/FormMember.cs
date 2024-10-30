@@ -22,8 +22,14 @@ namespace Marketplace
         private void LoadCategories()
         {
             var searchCategories = CategoryRepository.GetList();
+
+            var advertisementCategory = searchCategories;
+
+            var emptyCategory = new Category(-1, "");
+            searchCategories.Insert(0, emptyCategory);
+
             ComboBoxHelper.SetComboBoxDataSource(comboBoxSearchCategory, searchCategories);
-            ComboBoxHelper.SetComboBoxDataSource(comboBoxAdvertisementCategory, searchCategories);
+            ComboBoxHelper.SetComboBoxDataSource(comboBoxAdvertisementCategory, advertisementCategory);
         }
         private void LoadSortingOptions()
         {
@@ -48,7 +54,7 @@ namespace Marketplace
             formKlumpen.ShowDialog();
         }
 
-        private void comboBoxSortSearchResults_Click(object sender, EventArgs e)
+        private void comboBoxSortSearchResults_SelectedIndexChanged(object sender, EventArgs e)
         {
             string sortOption = comboBoxSortSearchResults.SelectedValue.ToString();
 
@@ -69,7 +75,7 @@ namespace Marketplace
 
         private void buttonSearch_Click(object sender, EventArgs e)
         {
-            int searchCategory = comboBoxSearchCategory.SelectedIndex;
+            int searchCategory = (int)comboBoxSearchCategory.SelectedValue;
             string searchTextParameter = textBoxSearchField.Text.Trim();
 
             searchResultList = AdvertisementRepository.SearchAdvertisement(searchCategory, searchTextParameter);
@@ -90,7 +96,7 @@ namespace Marketplace
                 textBoxTitle.Text = displayAdvertisement.Title;
                 textBoxPrice.Text = displayAdvertisement.Price.ToString();
                 richTextBoxDescription.Text = displayAdvertisement.Description;
-                comboBoxAdvertisementCategory.SelectedValue = displayAdvertisement.CategoryID + 1;
+                comboBoxAdvertisementCategory.SelectedValue = displayAdvertisement.CategoryID;
             }
             else
             {
@@ -122,7 +128,7 @@ namespace Marketplace
                 displayAdvertisement.SetAdvertisementTitle(textBoxTitle.Text);
                 displayAdvertisement.SetAdvertisementDescription(richTextBoxDescription.Text);
                 displayAdvertisement.SetAdvertisementPrice(price);
-                displayAdvertisement.SetAdvertisementCategoryID(comboBoxAdvertisementCategory.SelectedIndex);
+                displayAdvertisement.SetAdvertisementCategoryID((int)comboBoxAdvertisementCategory.SelectedValue);
 
                 AdvertisementRepository.Update(displayAdvertisement);
 
@@ -137,14 +143,14 @@ namespace Marketplace
 
         private void buttonSaveNewAdvertisement_Click(object sender, EventArgs e)
         {
-            if (textBoxTitle.Text.Trim() != string.Empty && textBoxPrice.Text.Replace(" ", "") != string.Empty && comboBoxAdvertisementCategory.SelectedIndex != -1 &&
+            if (textBoxTitle.Text.Trim() != string.Empty && textBoxPrice.Text.Replace(" ", "") != string.Empty && (int)comboBoxAdvertisementCategory.SelectedValue != -1 &&
                richTextBoxDescription.Text.Trim() != string.Empty)
             {
                 bool successfullParse = int.TryParse(textBoxPrice.Text.Replace(" ", ""), out int price);
 
                 if (successfullParse)
                 {
-                    Advertisement newAdvertisement = new(textBoxTitle.Text.Trim(), richTextBoxDescription.Text.Trim(), activeMember.Username, price, comboBoxAdvertisementCategory.SelectedIndex);
+                    Advertisement newAdvertisement = new(textBoxTitle.Text.Trim(), richTextBoxDescription.Text.Trim(), activeMember.Username, price, (int)comboBoxAdvertisementCategory.SelectedValue);
 
                     AdvertisementRepository.Save(newAdvertisement);
 

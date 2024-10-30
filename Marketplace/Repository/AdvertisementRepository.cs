@@ -42,6 +42,8 @@ namespace Marketplace.Repository
 
             List<SqlParameter> parameters = new();
             parameters.Add(new SqlParameter("@advertisementID", advertisement.AdvertisementID));
+
+            DbContext.ExecuteNonQuery(sqlQuery, parameters);
         }
 
         public static List<Advertisement> GetList()
@@ -105,7 +107,7 @@ namespace Marketplace.Repository
             {
                 sqlQuery = "SELECT * FROM Advertisement WHERE LOWER(Title) LIKE @searchParameterAsLower";
 
-                parameters.Add(new SqlParameter("@serachParameterAsLower", searchParameterAsLower));
+                parameters.Add(new SqlParameter("@searchParameterAsLower", searchParameterAsLower));
             }
             else if (string.IsNullOrEmpty(searchTitle))
             {

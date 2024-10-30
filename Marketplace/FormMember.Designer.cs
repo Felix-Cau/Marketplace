@@ -68,7 +68,7 @@
             comboBoxSortSearchResults.Name = "comboBoxSortSearchResults";
             comboBoxSortSearchResults.Size = new Size(157, 23);
             comboBoxSortSearchResults.TabIndex = 36;
-            comboBoxSortSearchResults.Click += comboBoxSortSearchResults_Click;
+            comboBoxSortSearchResults.SelectedIndexChanged += comboBoxSortSearchResults_SelectedIndexChanged;
             // 
             // buttonClearFields
             // 

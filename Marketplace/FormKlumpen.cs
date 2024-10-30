@@ -15,10 +15,15 @@ namespace Marketplace
 
         List<Advertisement> searchResultList = new();
         Advertisement displayAdvertisement = null;
-      
+
         private void LoadCategories()
         {
             var searchCategories = CategoryRepository.GetList();
+
+            var advertisementCategory = searchCategories;
+
+            var emptyCategory = new Category(-1, "");
+            searchCategories.Insert(0, emptyCategory);
 
             ComboBoxHelper.SetComboBoxDataSource(comboBoxSearchCategory, searchCategories);
             ComboBoxHelper.SetComboBoxDataSource(comboBoxAdvertisementCategory, searchCategories);
@@ -33,7 +38,7 @@ namespace Marketplace
 
         private void buttonSearch_Click(object sender, EventArgs e)
         {
-            int searchCategory = comboBoxSearchCategory.SelectedIndex;
+            int searchCategory = (int)comboBoxSearchCategory.SelectedValue;
             string searchTextParameter = textBoxSearchField.Text.Trim();
 
             searchResultList = AdvertisementRepository.SearchAdvertisement(searchCategory, searchTextParameter);
@@ -64,7 +69,7 @@ namespace Marketplace
                 textBoxTitle.Text = displayAdvertisement.Title;
                 textBoxPrice.Text = displayAdvertisement.Price.ToString();
                 richTextBoxDescription.Text = displayAdvertisement.Description;
-                comboBoxAdvertisementCategory.SelectedValue = displayAdvertisement.CategoryID + 1;
+                comboBoxAdvertisementCategory.SelectedValue = displayAdvertisement.CategoryID;
             }
             else
             {
@@ -72,13 +77,15 @@ namespace Marketplace
             }
         }
 
-        private void comboBoxSortSearchResults_Click(object sender, EventArgs e)
+        private void comboBoxSortSearchResults_SelectedIndexChanged(object sender, EventArgs e)
         {
             string sortOption = comboBoxSortSearchResults.SelectedValue.ToString();
 
             var searchResultListSorted = SorterHelper.SortAdvertisementList(sortOption, searchResultList);
 
-            searchResultList = searchResultListSorted;
+            listBoxSearchResult.DataSource = searchResultListSorted;
+            listBoxSearchResult.DisplayMember = "Title";
+            listBoxSearchResult.ValueMember = "AdvertisementID";
         }
 
         private void buttonLogin_Click(object sender, EventArgs e)

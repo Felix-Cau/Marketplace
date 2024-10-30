@@ -8,8 +8,8 @@ namespace Marketplace.Helper_classes
         {
             {"Billigast", "PriceAsc"},
             {"Dyrast", "PriceDesc"},
-            {"Äldst", "DateDesc"},
-            {"Senaste", "DateAsc"}
+            {"Äldst", "DateAsc"},
+            {"Senaste", "DateDesc"}
         };
 
         public static List<Advertisement> SortAdvertisementList(string sortingOption, List<Advertisement> advertisementList)

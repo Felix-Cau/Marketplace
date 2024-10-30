@@ -57,6 +57,8 @@ namespace Marketplace
                         MemberRepository.Save(newMember);
 
                         MessageBox.Show("Registrering lyckades. Logga in för att fortsätta.");
+
+                        buttonResetFields_Click(sender, e);
                     }
                     else
                     {
