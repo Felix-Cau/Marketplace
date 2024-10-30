@@ -1,7 +1,6 @@
 ﻿using Marketplace.Entities;
 using System.Data;
 using System.Data.SqlClient;
-using System.DirectoryServices;
 
 namespace Marketplace.Repository
 {
