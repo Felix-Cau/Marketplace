@@ -123,23 +123,30 @@ namespace Marketplace
 
         private void buttonUpdateAdvertisement_Click(object sender, EventArgs e)
         {
-            bool successfullParse = int.TryParse(textBoxPrice.Text.Replace(" ", ""), out int price);
-
-            if (successfullParse)
+            if (displayAdvertisement.Username != activeMember.Username)
             {
-                displayAdvertisement.SetAdvertisementTitle(textBoxTitle.Text);
-                displayAdvertisement.SetAdvertisementDescription(richTextBoxDescription.Text);
-                displayAdvertisement.SetAdvertisementPrice(price);
-                displayAdvertisement.SetAdvertisementCategoryID((int)comboBoxAdvertisementCategory.SelectedValue);
-
-                AdvertisementRepository.Update(displayAdvertisement);
-
-                MessageBox.Show("Annonsen är uppdaterad.");
-                buttonClearFields_Click(sender, e);
+                MessageBox.Show("Du kan bara uppdatera annonser du själv har skapat.");
             }
             else
             {
-                MessageBox.Show("Du har inte angett ett korrekt värde som pris. Försök igen.");
+                bool successfullParse = int.TryParse(textBoxPrice.Text.Replace(" ", ""), out int price);
+
+                if (successfullParse)
+                {
+                    displayAdvertisement.SetAdvertisementTitle(textBoxTitle.Text);
+                    displayAdvertisement.SetAdvertisementDescription(richTextBoxDescription.Text);
+                    displayAdvertisement.SetAdvertisementPrice(price);
+                    displayAdvertisement.SetAdvertisementCategoryID((int)comboBoxAdvertisementCategory.SelectedValue);
+
+                    AdvertisementRepository.Update(displayAdvertisement);
+
+                    MessageBox.Show("Annonsen är uppdaterad.");
+                    buttonClearFields_Click(sender, e);
+                }
+                else
+                {
+                    MessageBox.Show("Du har inte angett ett korrekt värde som pris. Försök igen.");
+                }
             }
         }
 
