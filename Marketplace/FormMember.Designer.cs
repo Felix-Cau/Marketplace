@@ -47,8 +47,9 @@
             buttonSearch = new Button();
             buttonLogOut = new Button();
             buttonLoadUserAdvertisements = new Button();
-            button2 = new Button();
-            button3 = new Button();
+            buttonUpdateAdvertisement = new Button();
+            buttonRemoveAdvertisement = new Button();
+            buttonSaveNewAdvertisement = new Button();
             SuspendLayout();
             // 
             // label7
@@ -162,6 +163,7 @@
             listBoxSearchResult.Name = "listBoxSearchResult";
             listBoxSearchResult.Size = new Size(157, 454);
             listBoxSearchResult.TabIndex = 25;
+            listBoxSearchResult.Click += listBoxSearchResult_Click;
             // 
             // label1
             // 
@@ -217,31 +219,44 @@
             buttonLoadUserAdvertisements.UseVisualStyleBackColor = true;
             buttonLoadUserAdvertisements.Click += buttonLoadUserAdvertisements_Click;
             // 
-            // button2
+            // buttonUpdateAdvertisement
             // 
-            button2.Location = new Point(424, 591);
-            button2.Name = "button2";
-            button2.Size = new Size(75, 23);
-            button2.TabIndex = 39;
-            button2.Text = "button2";
-            button2.UseVisualStyleBackColor = true;
+            buttonUpdateAdvertisement.Location = new Point(357, 591);
+            buttonUpdateAdvertisement.Name = "buttonUpdateAdvertisement";
+            buttonUpdateAdvertisement.Size = new Size(117, 23);
+            buttonUpdateAdvertisement.TabIndex = 39;
+            buttonUpdateAdvertisement.Text = "Uppdatera annons";
+            buttonUpdateAdvertisement.UseVisualStyleBackColor = true;
+            buttonUpdateAdvertisement.Click += buttonUpdateAdvertisement_Click;
             // 
-            // button3
+            // buttonRemoveAdvertisement
             // 
-            button3.Location = new Point(505, 591);
-            button3.Name = "button3";
-            button3.Size = new Size(75, 23);
-            button3.TabIndex = 40;
-            button3.Text = "button3";
-            button3.UseVisualStyleBackColor = true;
+            buttonRemoveAdvertisement.Location = new Point(480, 591);
+            buttonRemoveAdvertisement.Name = "buttonRemoveAdvertisement";
+            buttonRemoveAdvertisement.Size = new Size(100, 23);
+            buttonRemoveAdvertisement.TabIndex = 40;
+            buttonRemoveAdvertisement.Text = "Ta bort annons";
+            buttonRemoveAdvertisement.UseVisualStyleBackColor = true;
+            buttonRemoveAdvertisement.Click += buttonRemoveAdvertisement_Click;
+            // 
+            // buttonSaveNewAdvertisement
+            // 
+            buttonSaveNewAdvertisement.Location = new Point(248, 591);
+            buttonSaveNewAdvertisement.Name = "buttonSaveNewAdvertisement";
+            buttonSaveNewAdvertisement.Size = new Size(103, 23);
+            buttonSaveNewAdvertisement.TabIndex = 41;
+            buttonSaveNewAdvertisement.Text = "Spara ny annons";
+            buttonSaveNewAdvertisement.UseVisualStyleBackColor = true;
+            buttonSaveNewAdvertisement.Click += buttonSaveNewAdvertisement_Click;
             // 
             // FormMember
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(684, 661);
-            Controls.Add(button3);
-            Controls.Add(button2);
+            Controls.Add(buttonSaveNewAdvertisement);
+            Controls.Add(buttonRemoveAdvertisement);
+            Controls.Add(buttonUpdateAdvertisement);
             Controls.Add(buttonLoadUserAdvertisements);
             Controls.Add(label7);
             Controls.Add(comboBoxSortSearchResults);
@@ -288,7 +303,8 @@
         private Button buttonSearch;
         private Button buttonLogOut;
         private Button buttonLoadUserAdvertisements;
-        private Button button2;
-        private Button button3;
+        private Button buttonUpdateAdvertisement;
+        private Button buttonRemoveAdvertisement;
+        private Button buttonSaveNewAdvertisement;
     }
 }

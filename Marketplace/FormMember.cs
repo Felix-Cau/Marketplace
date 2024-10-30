@@ -16,6 +16,7 @@ namespace Marketplace
     public partial class FormMember : Form
     {
         Member activeMember = null;
+        Advertisement displayAdvertisement = null;
         public FormMember(Member member)
         {
             activeMember = member;
@@ -90,6 +91,77 @@ namespace Marketplace
             listBoxSearchResult.DataSource = searchResultList;
             listBoxSearchResult.DisplayMember = "Title";
             listBoxSearchResult.ValueMember = "AdvertisementID";
+        }
+
+        private void listBoxSearchResult_Click(object sender, EventArgs e)
+        {
+            int advertisementID = listBoxSearchResult.SelectedIndex;
+
+            displayAdvertisement = searchResultList.SingleOrDefault(x => x.AdvertisementID == advertisementID);
+
+            if (displayAdvertisement is not null)
+            {
+                textBoxTitle.Text = displayAdvertisement.Title;
+                textBoxPrice.Text = displayAdvertisement.Price.ToString();
+                richTextBoxDescription.Text = displayAdvertisement.Description;
+                comboBoxAdvertisementCategory.SelectedValue = displayAdvertisement.CategoryID;
+            }
+            else
+            {
+                MessageBox.Show("Något gick fel. Försök igen.");
+            }
+        }
+
+        private void buttonRemoveAdvertisement_Click(object sender, EventArgs e)
+        {
+
+            if (displayAdvertisement.Username != activeMember.Username)
+            {
+                MessageBox.Show("Du kan bara ta bort annonser du själv har skapat.");
+            }
+            else
+            {
+                AdvertisementRepository.Delete(displayAdvertisement);
+            }
+        }
+
+        private void buttonUpdateAdvertisement_Click(object sender, EventArgs e)
+        {
+            bool successfullParse = int.TryParse(textBoxPrice.Text.Replace(" ", ""), out int price);
+
+            if (successfullParse)
+            {
+                displayAdvertisement.SetAdvertisementTitle(textBoxTitle.Text);
+                displayAdvertisement.SetAdvertisementDescription(richTextBoxDescription.Text);
+                displayAdvertisement.SetAdvertisementPrice(price);
+                displayAdvertisement.SetAdvertisementCategoryID(comboBoxAdvertisementCategory.SelectedIndex);
+
+                AdvertisementRepository.Update(displayAdvertisement);
+            }
+            else
+            {
+                MessageBox.Show("Du har inte angett ett korrekt värde som pris. Försök igen.");
+            }
+        }
+
+        private void buttonSaveNewAdvertisement_Click(object sender, EventArgs e)
+        {
+            if (textBoxTitle.Text.Trim() != string.Empty && textBoxPrice.Text.Replace(" ", "") != string.Empty && comboBoxAdvertisementCategory.SelectedIndex != -1 &&
+               richTextBoxDescription.Text.Trim() != string.Empty)
+            {
+                bool successfullParse = int.TryParse(textBoxPrice.Text.Replace(" ", ""), out int price);
+
+                if (successfullParse)
+                {
+                    Advertisement newAdvertisement = new(textBoxTitle.Text.Trim(), richTextBoxDescription.Text.Trim(), activeMember.Username, price, comboBoxAdvertisementCategory.SelectedIndex);
+
+                    AdvertisementRepository.Save(newAdvertisement);
+                }
+            }
+            else
+            {
+                MessageBox.Show("Fälten titel, beskrivning, pris och annonskategori måste vara ifyllda.");
+            }
         }
     }
 }

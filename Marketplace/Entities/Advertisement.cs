@@ -38,5 +38,13 @@ namespace Marketplace.Entities
             CategoryID = category;
             Date = date;
         }
+
+        public void SetAdvertisementTitle(string title) { Title = title; }
+
+        public void SetAdvertisementDescription(string description) { Description = description; }
+
+        public void SetAdvertisementPrice(int price) { Price = price; }
+
+        public void SetAdvertisementCategoryID(int categoryID) { CategoryID = categoryID; }
     }
 }
