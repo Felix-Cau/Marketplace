@@ -15,18 +15,13 @@ namespace Marketplace
 
         List<Advertisement> searchResultList = new();
         Advertisement displayAdvertisement = null;
-
+      
         private void LoadCategories()
         {
-            var categories = CategoryRepository.GetList();
+            var searchCategories = CategoryRepository.GetList();
 
-            comboBoxSearchCategory.DataSource = categories;
-            comboBoxSearchCategory.DisplayMember = "CategoryName";
-            comboBoxSearchCategory.ValueMember = "CategoryID";
-
-            comboBoxAdvertisementCategory.DataSource = categories;
-            comboBoxAdvertisementCategory.DisplayMember = "CategoryName";
-            comboBoxAdvertisementCategory.ValueMember = "CategoryID";
+            ComboBoxHelper.SetComboBoxDataSource(comboBoxSearchCategory, searchCategories);
+            ComboBoxHelper.SetComboBoxDataSource(comboBoxAdvertisementCategory, searchCategories);
         }
 
         private void LoadSortingOptions()
@@ -60,7 +55,7 @@ namespace Marketplace
 
         private void listBoxSearchResult_Click(object sender, EventArgs e)
         {
-            int advertisementID = listBoxSearchResult.SelectedIndex;
+            int advertisementID = (int)listBoxSearchResult.SelectedValue;
 
             displayAdvertisement = searchResultList.SingleOrDefault(x => x.AdvertisementID == advertisementID);
 
@@ -69,7 +64,7 @@ namespace Marketplace
                 textBoxTitle.Text = displayAdvertisement.Title;
                 textBoxPrice.Text = displayAdvertisement.Price.ToString();
                 richTextBoxDescription.Text = displayAdvertisement.Description;
-                comboBoxAdvertisementCategory.SelectedValue = displayAdvertisement.CategoryID;
+                comboBoxAdvertisementCategory.SelectedValue = displayAdvertisement.CategoryID + 1;
             }
             else
             {
@@ -85,5 +80,20 @@ namespace Marketplace
 
             searchResultList = searchResultListSorted;
         }
+
+        private void buttonLogin_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            FormLogin formLogin = new FormLogin();
+            formLogin.ShowDialog();
+        }
+
+        private void buttonCreateNewMember_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            FormRegisterMember formRegisterMember = new FormRegisterMember();
+            formRegisterMember.ShowDialog();
+        }
+
     }
 }

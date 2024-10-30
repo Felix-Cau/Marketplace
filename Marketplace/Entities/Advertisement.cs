@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Marketplace.Entities
+﻿namespace Marketplace.Entities
 {
     public class Advertisement
     {
@@ -28,7 +22,7 @@ namespace Marketplace.Entities
         }
 
         //Constructor for mapping from DB
-        public Advertisement(int advertisementID, string title, string description, string username, int price, int category, DateTime date)
+        public Advertisement(int advertisementID, string title, string description, DateTime date, string username, int price, int category)
         {
             AdvertisementID = advertisementID;
             Title = title;

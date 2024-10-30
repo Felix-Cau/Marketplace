@@ -1,15 +1,6 @@
 ﻿using Marketplace.Entities;
 using Marketplace.Helper_classes;
 using Marketplace.Repository;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 
 namespace Marketplace
 {
@@ -17,6 +8,7 @@ namespace Marketplace
     {
         Member activeMember = null;
         Advertisement displayAdvertisement = null;
+
         public FormMember(Member member)
         {
             activeMember = member;
@@ -29,15 +21,9 @@ namespace Marketplace
 
         private void LoadCategories()
         {
-            var categories = CategoryRepository.GetList();
-
-            comboBoxSearchCategory.DataSource = categories;
-            comboBoxSearchCategory.DisplayMember = "CategoryName";
-            comboBoxSearchCategory.ValueMember = "CategoryID";
-
-            comboBoxAdvertisementCategory.DataSource = categories;
-            comboBoxAdvertisementCategory.DisplayMember = "CategoryName";
-            comboBoxAdvertisementCategory.ValueMember = "CategoryID";
+            var searchCategories = CategoryRepository.GetList();
+            ComboBoxHelper.SetComboBoxDataSource(comboBoxSearchCategory, searchCategories);
+            ComboBoxHelper.SetComboBoxDataSource(comboBoxAdvertisementCategory, searchCategories);
         }
         private void LoadSortingOptions()
         {
@@ -95,7 +81,7 @@ namespace Marketplace
 
         private void listBoxSearchResult_Click(object sender, EventArgs e)
         {
-            int advertisementID = listBoxSearchResult.SelectedIndex;
+            int advertisementID = (int)listBoxSearchResult.SelectedValue;
 
             displayAdvertisement = searchResultList.SingleOrDefault(x => x.AdvertisementID == advertisementID);
 
@@ -104,7 +90,7 @@ namespace Marketplace
                 textBoxTitle.Text = displayAdvertisement.Title;
                 textBoxPrice.Text = displayAdvertisement.Price.ToString();
                 richTextBoxDescription.Text = displayAdvertisement.Description;
-                comboBoxAdvertisementCategory.SelectedValue = displayAdvertisement.CategoryID;
+                comboBoxAdvertisementCategory.SelectedValue = displayAdvertisement.CategoryID + 1;
             }
             else
             {
@@ -122,6 +108,8 @@ namespace Marketplace
             else
             {
                 AdvertisementRepository.Delete(displayAdvertisement);
+
+                buttonClearFields_Click(sender, e);
             }
         }
 
@@ -137,6 +125,9 @@ namespace Marketplace
                 displayAdvertisement.SetAdvertisementCategoryID(comboBoxAdvertisementCategory.SelectedIndex);
 
                 AdvertisementRepository.Update(displayAdvertisement);
+
+                MessageBox.Show("Annonsen är uppdaterad.");
+                buttonClearFields_Click(sender, e);
             }
             else
             {
@@ -156,7 +147,12 @@ namespace Marketplace
                     Advertisement newAdvertisement = new(textBoxTitle.Text.Trim(), richTextBoxDescription.Text.Trim(), activeMember.Username, price, comboBoxAdvertisementCategory.SelectedIndex);
 
                     AdvertisementRepository.Save(newAdvertisement);
+
+                    MessageBox.Show("Annonsen sparad.");
+
+                    buttonClearFields_Click(sender, e);
                 }
+
             }
             else
             {

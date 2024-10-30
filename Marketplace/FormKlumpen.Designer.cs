@@ -57,6 +57,7 @@
             buttonLogin.TabIndex = 0;
             buttonLogin.Text = "Logga in";
             buttonLogin.UseVisualStyleBackColor = true;
+            buttonLogin.Click += buttonLogin_Click;
             // 
             // buttonCreateNewMember
             // 
@@ -66,6 +67,7 @@
             buttonCreateNewMember.TabIndex = 1;
             buttonCreateNewMember.Text = "Skapa ny användare";
             buttonCreateNewMember.UseVisualStyleBackColor = true;
+            buttonCreateNewMember.Click += buttonCreateNewMember_Click;
             // 
             // buttonSearch
             // 

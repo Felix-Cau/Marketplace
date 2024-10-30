@@ -1,12 +1,7 @@
 ﻿using Marketplace.Entities;
-using System;
-using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
-using System.Linq;
-using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
+using System.DirectoryServices;
 
 namespace Marketplace.Repository
 {
@@ -59,8 +54,12 @@ namespace Marketplace.Repository
 
             foreach (DataRow row in data.Rows)
             {
-                advertisements.Add(new Advertisement((int)row.ItemArray[0], row.ItemArray[1].ToString(), row.ItemArray[2].ToString(), row.ItemArray[3].ToString(), 
-                                                     (int)row.ItemArray[4], (int)row.ItemArray[5], (DateTime)row.ItemArray[6]));
+                bool successfullParse = int.TryParse(row.ItemArray[5].ToString().Replace(" ", ""), out int price);
+                if (successfullParse)
+                {
+                    advertisements.Add(new Advertisement((int)row.ItemArray[0], row.ItemArray[1].ToString(), row.ItemArray[2].ToString(), (DateTime)row.ItemArray[3], row.ItemArray[4].ToString(),
+                                       price, (int)row.ItemArray[6]));
+                }
             }
 
             return advertisements;
@@ -79,8 +78,12 @@ namespace Marketplace.Repository
 
             foreach (DataRow row in data.Rows)
             {
-                advertisements.Add(new Advertisement((int)row.ItemArray[0], row.ItemArray[1].ToString(), row.ItemArray[2].ToString(), row.ItemArray[3].ToString(),
-                                                     (int)row.ItemArray[4], (int)row.ItemArray[5], (DateTime)row.ItemArray[6]));
+                bool successfullParse = int.TryParse(row.ItemArray[5].ToString().Replace(" ", ""), out int price);
+                if (successfullParse)
+                {
+                    advertisements.Add(new Advertisement((int)row.ItemArray[0], row.ItemArray[1].ToString(), row.ItemArray[2].ToString(), (DateTime)row.ItemArray[3], row.ItemArray[4].ToString(),
+                                       price, (int)row.ItemArray[6]));
+                }
             }
 
             return advertisements;
@@ -122,8 +125,14 @@ namespace Marketplace.Repository
 
             foreach (DataRow row in data.Rows)
             {
-                searchResult.Add(new Advertisement((int)row.ItemArray[0], row.ItemArray[1].ToString(), row.ItemArray[2].ToString(), row.ItemArray[3].ToString(), 
-                                                   (int)row.ItemArray[4], (int)row.ItemArray[5], (DateTime)row.ItemArray[6]));
+                bool successfullParse = int.TryParse(row.ItemArray[5].ToString().Replace(" ", ""), out int price);
+                if (successfullParse)
+                {
+                    searchResult.Add(new Advertisement((int)row.ItemArray[0], row.ItemArray[1].ToString(), row.ItemArray[2].ToString(), (DateTime)row.ItemArray[3], row.ItemArray[4].ToString(),
+                                                        price, (int)row.ItemArray[6]));
+                }
+                //searchResult.Add(new Advertisement((int)row.ItemArray[0], row.ItemArray[1].ToString(), row.ItemArray[2].ToString(), row.ItemArray[3].ToString(), 
+                //                                   (int)row.ItemArray[4], (int)row.ItemArray[5], (DateTime)row.ItemArray[6]));
             }
 
             return searchResult;

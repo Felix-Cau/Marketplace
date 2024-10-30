@@ -1,11 +1,6 @@
 ﻿using Marketplace.Entities;
-using System;
-using System.Collections.Generic;
-using System.Data.SqlClient;
 using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Data.SqlClient;
 
 namespace Marketplace.Repository
 {
@@ -21,7 +16,7 @@ namespace Marketplace.Repository
 
             foreach (DataRow row in data.Rows)
             {
-                categories.Add(new Category((int)row.ItemArray[0], row.ItemArray[1].ToString()));
+                categories.Add(new Category((int)row.ItemArray[0], row.ItemArray[1].ToString().Trim()));
             }
 
             return categories;

@@ -1,11 +1,6 @@
 ﻿using Marketplace.Entities;
-using System;
-using System.Collections.Generic;
-using System.Data.SqlClient;
 using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Data.SqlClient;
 
 namespace Marketplace.Repository
 {
@@ -69,19 +64,23 @@ namespace Marketplace.Repository
                                        row.ItemArray[4].ToString(), (int)row.ItemArray[5], row.ItemArray[6].ToString(), row.ItemArray[7].ToString(), row.ItemArray[8].ToString()));
             }
 
-            if (members.Count > 0)
-            {
-                Member returnMember = members.SingleOrDefault(x => x.Username == username);
-                correctMemberLogin = true;
+            Member returnMember = members.Count == 1 ? members[0] : null;
+            correctMemberLogin = returnMember != null;
 
-                return (correctMemberLogin, returnMember);
-            }
-            else
-            {
-                Member returnMember = null;
+            return (correctMemberLogin, returnMember);
+            //if (members.Count > 0)
+            //{
+            //    Member returnMember = members.SingleOrDefault(x => x.Username == username);
+            //    correctMemberLogin = true;
 
-                return (correctMemberLogin, returnMember);
-            }
+            //    return (correctMemberLogin, returnMember);
+            //}
+            //else
+            //{
+            //    Member returnMember = null;
+
+            //    return (correctMemberLogin, returnMember);
+            //}
         }
     }
 }
