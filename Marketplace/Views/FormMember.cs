@@ -2,7 +2,7 @@
 using Marketplace.Helper_classes;
 using Marketplace.Repository;
 
-namespace Marketplace
+namespace Marketplace.Views
 {
     public partial class FormMember : Form
     {
@@ -40,9 +40,7 @@ namespace Marketplace
 
         private void buttonLoadUserAdvertisements_Click(object sender, EventArgs e)
         {
-            searchResultList = AdvertisementRepository.GetListBasedOnUser(activeMember);
-
-            listBoxSearchResult.DataSource = searchResultList;
+            listBoxSearchResult.DataSource = AdvertisementRepository.GetListBasedOnUser(activeMember);
             listBoxSearchResult.DisplayMember = "Title";
             listBoxSearchResult.ValueMember = "AdvertisementID";
         }
@@ -58,9 +56,7 @@ namespace Marketplace
         {
             string sortOption = comboBoxSortSearchResults.SelectedValue.ToString();
 
-            var searchResultListSorted = SorterHelper.SortAdvertisementList(sortOption, searchResultList);
-
-            listBoxSearchResult.DataSource = searchResultListSorted;
+            listBoxSearchResult.DataSource = SorterHelper.SortAdvertisementList(sortOption, searchResultList);
             listBoxSearchResult.DisplayMember = "Title";
             listBoxSearchResult.ValueMember = "AdvertisementID";
         }

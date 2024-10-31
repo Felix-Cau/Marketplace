@@ -3,7 +3,7 @@ using Marketplace.Helper_classes;
 using Marketplace.Repository;
 using Message = Marketplace.Entities.Message;
 
-namespace Marketplace
+namespace Marketplace.Views
 {
     public partial class FormMessages : Form
     {
@@ -38,9 +38,7 @@ namespace Marketplace
 
         private void LoadMessages()
         {
-            recievedMessages = MessageRepository.GetMessages(activeMember);
-
-            listBoxMessageList.DataSource = recievedMessages;
+            listBoxMessageList.DataSource = MessageRepository.GetMessages(activeMember);
             listBoxMessageList.DisplayMember = "Title";
             listBoxMessageList.ValueMember = "MessageID";
         }
@@ -111,9 +109,7 @@ namespace Marketplace
                     LoadMessages();
                     break;
                 case "Send":
-                    recievedMessages = MessageRepository.GetSendMessages(activeMember);
-
-                    listBoxMessageList.DataSource = recievedMessages;
+                    listBoxMessageList.DataSource = MessageRepository.GetSendMessages(activeMember);
                     listBoxMessageList.DisplayMember = "Title";
                     listBoxMessageList.ValueMember = "MessageID";
                     break;

@@ -1,4 +1,4 @@
-﻿namespace Marketplace
+﻿namespace Marketplace.Views
 {
     partial class FormKlumpen
     {

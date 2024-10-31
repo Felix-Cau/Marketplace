@@ -2,7 +2,7 @@ using Marketplace.Entities;
 using Marketplace.Helper_classes;
 using Marketplace.Repository;
 
-namespace Marketplace
+namespace Marketplace.Views
 {
     public partial class FormKlumpen : Form
     {
@@ -83,9 +83,7 @@ namespace Marketplace
         {
             string sortOption = comboBoxSortSearchResults.SelectedValue.ToString();
 
-            var searchResultListSorted = SorterHelper.SortAdvertisementList(sortOption, searchResultList);
-
-            listBoxSearchResult.DataSource = searchResultListSorted;
+            listBoxSearchResult.DataSource =  SorterHelper.SortAdvertisementList(sortOption, searchResultList);
             listBoxSearchResult.DisplayMember = "Title";
             listBoxSearchResult.ValueMember = "AdvertisementID";
         }

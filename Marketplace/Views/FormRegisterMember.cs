@@ -1,7 +1,7 @@
 ﻿using Marketplace.Entities;
 using Marketplace.Repository;
 
-namespace Marketplace
+namespace Marketplace.Views
 {
     public partial class FormRegisterMember : Form
     {

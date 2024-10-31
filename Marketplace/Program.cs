@@ -1,3 +1,5 @@
+using Marketplace.Views;
+
 namespace Marketplace
 {
     internal static class Program
