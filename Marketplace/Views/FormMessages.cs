@@ -10,6 +10,7 @@ namespace Marketplace.Views
         Member activeMember = null;
         Message currentMessage = null;
         Advertisement currentAdvertisement = null;
+        List<Message> recievedMessages = new();
 
         public FormMessages(Member member)
         {
@@ -34,11 +35,11 @@ namespace Marketplace.Views
             currentMessage = new(activeMember.Username, advertisement.Username, textBoxTopic.Text.Trim(), richTextBoxMessageText.Text.Trim());
         }
 
-        List<Message> recievedMessages = new();
-
         private void LoadMessages()
         {
-            listBoxMessageList.DataSource = MessageRepository.GetMessages(activeMember);
+            recievedMessages = MessageRepository.GetMessages(activeMember);
+
+            listBoxMessageList.DataSource = recievedMessages;
             listBoxMessageList.DisplayMember = "Title";
             listBoxMessageList.ValueMember = "MessageID";
         }
@@ -109,7 +110,9 @@ namespace Marketplace.Views
                     LoadMessages();
                     break;
                 case "Send":
-                    listBoxMessageList.DataSource = MessageRepository.GetSendMessages(activeMember);
+                    recievedMessages = MessageRepository.GetSendMessages(activeMember);
+
+                    listBoxMessageList.DataSource = recievedMessages;
                     listBoxMessageList.DisplayMember = "Title";
                     listBoxMessageList.ValueMember = "MessageID";
                     break;
