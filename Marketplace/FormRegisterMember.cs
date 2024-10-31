@@ -32,6 +32,7 @@ namespace Marketplace
             textBoxFirstName.Text = string.Empty;
             textBoxLastName.Text = string.Empty;
             textBoxAddress.Text = string.Empty;
+            textBoxPostalCode.Text = string.Empty;
             textBoxCity.Text = string.Empty;
             textBoxEmail.Text = string.Empty;
             textBoxPhoneNumber.Text = string.Empty;
