@@ -68,6 +68,8 @@ namespace Marketplace.Views
             textBoxPrice.Text = string.Empty;
             richTextBoxDescription.Text = string.Empty;
             textBoxSearchField.Text = string.Empty;
+            textBoxDateCreated.Text = string.Empty;
+            textBoxUsername.Text = string.Empty;
             LoadCategories();
         }
 
